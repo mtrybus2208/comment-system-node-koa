@@ -1,6 +1,5 @@
 node_modules
-test.js
-coverage
+.DS_Store
+/dist
 npm-debug.log
-.idea
-*.iml
+package-lock.json
