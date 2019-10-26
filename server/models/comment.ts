@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
+import Comment from '../interfaces/comment';
 const { Schema } = mongoose;
 
 mongoose.Promise = global.Promise;
 
-const commentSchema = new Schema({
+const commentSchema: mongoose.Schema = new Schema({
   id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
@@ -12,12 +13,12 @@ const commentSchema = new Schema({
   },
   slug: {
     type: String,
-    required: true
+    required: true,
   },
   text: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 commentSchema.plugin(uniqueValidator);
-export default mongoose.model('Comment', commentSchema);
+export default mongoose.model<Comment>('Comment', commentSchema);

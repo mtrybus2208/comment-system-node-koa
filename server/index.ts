@@ -1,4 +1,3 @@
-import path from 'path';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
@@ -14,7 +13,7 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.connect(connexionString);
 mongoose.connection.on('error', console.error);
 
-const app = new Koa();
+const app: Koa = new Koa();
 
 app
   .use(logger())
@@ -24,7 +23,7 @@ app
 routing(app);
 
 app.listen(port, () =>
-  console.log(`✅  The server is running at http://localhost:${port}/`)
+  console.log(`✅  The server is running at http://localhost:${port}/`),
 );
 
 export default app;

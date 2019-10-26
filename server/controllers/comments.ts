@@ -1,6 +1,7 @@
+import Koa from 'koa';
 import Comment from '../models/comment';
 
-export const add = async (ctx) => {
+export const add = async (ctx: Koa.Context) => {
   try {
     const comment = await new Comment(ctx.request.body).save();
     ctx.body = comment;
@@ -9,7 +10,7 @@ export const add = async (ctx) => {
   }
 }
 
-export const find = async (ctx) => {
+export const find = async (ctx: Koa.Context) => {
   try {
     ctx.body = await Comment.find();
   } catch (err) {
@@ -17,7 +18,7 @@ export const find = async (ctx) => {
   }
 }
 
-export const findByField = async (ctx) => {
+export const findByField = async (ctx: Koa.Context) => {
   try {
     const comment = await Comment.find(ctx.query);
     if (!comment) {

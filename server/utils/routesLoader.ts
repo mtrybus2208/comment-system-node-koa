@@ -1,23 +1,23 @@
 import glob from 'glob';
 
-export default dirname => {
+export default (dirname: string): Promise<object[]> => {
   return new Promise((resolve, reject) => {
-    const routes = [];
+    const routes: object[] = [];
     glob(
       `${dirname}/*`,
       {
-        ignore: '**/index.js'
+        ignore: '**/index.js',
       },
-      (err, files) => {
+      (err, files: string[]) => {
         if (err) {
           return reject(err);
         }
-        files.forEach(file => {
-          const route = require(file);
+        files.forEach((file: string): void => {
+          const route:object = require(file);
           routes.push(route);
         });
         return resolve(routes);
-      }
+      },
     );
   });
-}
+};
