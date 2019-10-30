@@ -1,0 +1,33 @@
+{
+  "swagger":"2.0",
+  "info":{
+    "description":"...",
+    "version":"1.0.0",
+    "title":"Node comment system api", 
+    "contact":{
+       "email":""
+    }
+ },
+  "tags":[
+    {
+       "name":"test",
+       "description":"test",
+       "externalDocs":{
+          "description":"Find out more",
+          "url":"http://swagger.io"
+       }
+    },
+    {
+       "name":"store",
+       "description":"test"
+    },
+    {
+       "name":"comments",
+       "description":"test",
+       "externalDocs":{
+          "description":"Find out more about our store",
+          "url":"http://swagger.io"
+       }
+    }
+ ]
+} 
