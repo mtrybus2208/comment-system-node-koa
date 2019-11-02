@@ -1,5 +1,7 @@
 import Koa from 'koa';
 import Comment from '../models/comment';
+import IComment from '../interfaces/comment';
+import { domain, port } from '../config';
 
 export const add = async (ctx: Koa.Context) => {
   try {
@@ -8,15 +10,28 @@ export const add = async (ctx: Koa.Context) => {
   } catch (err) {
     ctx.throw(422);
   }
-}
+};
 
 export const find = async (ctx: Koa.Context) => {
   try {
-    ctx.body = await Comment.find();
-  } catch (err) {
-    ctx.throw(400);
+    const comments: IComment[] = await Comment.find();
+    ctx.body = {
+      description: 'successful operation',
+      data: comments.map(comment => ({
+        comment,
+        request: {
+          type: 'GET',
+          url: `${domain}:${port}/comments/${comment._id}`,
+        },
+      })),
+    };
+  } catch (error) {
+    ctx.throw(400, JSON.stringify({
+      error,
+      description: 'Bad Request',
+    }));
   }
-}
+};
 
 export const findByField = async (ctx: Koa.Context) => {
   try {
@@ -31,4 +46,4 @@ export const findByField = async (ctx: Koa.Context) => {
     }
     ctx.throw(500);
   }
-}
+};

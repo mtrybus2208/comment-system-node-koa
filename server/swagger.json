@@ -3,31 +3,113 @@
   "info":{
     "description":"...",
     "version":"1.0.0",
-    "title":"Node comment system api", 
+    "title":"Node comment system api",
     "contact":{
        "email":""
-    }
+    },
+    "schemes":[
+      "https",
+      "http"
+   ]
  },
+ "basePath":"/api",
   "tags":[
     {
-       "name":"test",
-       "description":"test",
-       "externalDocs":{
-          "description":"Find out more",
-          "url":"http://swagger.io"
-       }
-    },
-    {
-       "name":"store",
-       "description":"test"
-    },
-    {
        "name":"comments",
-       "description":"test",
-       "externalDocs":{
-          "description":"Find out more about our store",
-          "url":"http://swagger.io"
-       }
+       "description":"Operations about comments"
     }
- ]
-} 
+ ],
+ "paths":{
+  "/comments/": {
+    "get": {
+      "tags":[
+        "comments"
+     ],
+     "summary":"Find all available comments",
+     "description":"",
+     "operationId":"getAllComments",
+     "produces":[
+          "application/json"
+      ],
+      "responses":{
+        "200":{
+           "description":"successful operation",
+           "schema":{
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type":"string"
+                },
+                "data": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentWithRequest"
+                  }
+                }
+              }
+           }
+        },
+        "400":{
+          "description":"Bad Request error",
+          "schema":{
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "object"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        }
+     }
+    }
+  }
+ },
+ "components": {
+   "schemas": {
+    "Comment":{
+      "type":"object",
+      "properties":{
+         "id":{
+            "type":"string"
+         },
+         "name":{
+            "type":"string"
+         },
+         "slug":{
+            "type":"string"
+         },
+         "text":{
+            "type":"string"
+         }
+      }
+    },
+    "Request":{
+      "type":"object",
+      "properties":{
+         "url":{
+            "type":"string"
+         },
+         "type":{
+            "type":"string"
+         }
+      }
+    },
+    "CommentWithRequest":{
+      "type":"object",
+      "properties":{
+         "comment":{
+          "$ref": "#/components/schemas/Comment"
+         },
+         "request":{
+          "$ref": "#/components/schemas/Request"
+         }
+      }
+    }
+   }
+ }
+}
+
+

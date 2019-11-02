@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import Comment from '../interfaces/comment';
+import IComment from '../interfaces/comment';
 const { Schema } = mongoose;
 
 mongoose.Promise = global.Promise;
@@ -21,4 +21,4 @@ const commentSchema: mongoose.Schema = new Schema({
   },
 });
 commentSchema.plugin(uniqueValidator);
-export default mongoose.model<Comment>('Comment', commentSchema);
+export default mongoose.model<IComment>('Comment', commentSchema);
